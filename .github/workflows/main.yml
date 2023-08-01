@@ -37,7 +37,7 @@ jobs:
       #     evilkost/publish-unit-test-result-action
       - name: Publish Test Results
 
-        uses: evilkost/publish-unit-test-result-action@v2
+        uses: evilkost/publish-unit-test-result-action@f0b5d2433f350eff587831d4ad22cb15aab75866
         if: always()
         with:
           files: |
