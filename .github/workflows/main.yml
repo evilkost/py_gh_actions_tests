@@ -36,8 +36,7 @@ jobs:
           pytest .  --junitxml=./report.xml
       #     evilkost/publish-unit-test-result-action
       - name: Publish Test Results
-
-        uses: evilkost/publish-unit-test-result-action@f0b5d2433f350eff587831d4ad22cb15aab75866
+        uses: evilkost/publish-unit-test-result-action@607e6ce0ee51a15fb263cd55fab8ad35d33da48a
         if: always()
         with:
           files: |
