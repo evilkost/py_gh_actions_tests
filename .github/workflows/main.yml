@@ -2,8 +2,7 @@
 name: PyTest
 on:
   push:
-    paths:
-      - *
+    branches: [ main ]
   workflow_dispatch:
     run_mypy:
       type: boolean
