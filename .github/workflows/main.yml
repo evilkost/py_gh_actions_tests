@@ -1,6 +1,14 @@
 # .github/workflows/app.yaml
 name: PyTest
-on: push
+on:
+  push:
+    paths:
+      - .
+  workflow_dispatch:
+    run_mypy:
+      type: boolean
+      default: false
+      description: "Check to run mypy"
 
 jobs:
   test:
@@ -24,6 +32,11 @@ jobs:
           pytest .  --junitxml=./report.xml
       #     evilkost/publish-unit-test-result-action
       - name: Publish Test Results
+        permissions:
+          contents: read
+          issues: read
+          checks: write
+          pull-requests: write
         uses: evilkost/publish-unit-test-result-action@v2
         if: always()
         with:
