@@ -35,7 +35,7 @@ jobs:
       - run: ls -laht
       - name: Run test suite 1
         run: |
-          pytest super_app/super_app_tests/tests_one.py  --junitxml=./report-1.xml
+          pytest super_app/super_app_tests/test_one.py  --junitxml=./report-1.xml
       - name: Run test suite 2
         run: |
           pytest super_app/super_app_tests/sub  --junitxml=./report-2.xml
