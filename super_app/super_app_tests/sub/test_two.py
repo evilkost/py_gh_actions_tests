@@ -1,4 +1,4 @@
-5def test_foo():
+def test_foo():
     assert 2 - 1 == 1
 
 def test_bar():
