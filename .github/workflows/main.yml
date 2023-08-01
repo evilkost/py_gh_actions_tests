@@ -16,7 +16,7 @@ jobs:
       issues: read
       checks: write
       pull-requests: write
-    runs-on: ubuntu-latest
+
     timeout-minutes: 10
     fail-fast: false
 
@@ -35,9 +35,11 @@ jobs:
       - run: pwd
       - run: ls -laht
       - name: Run test suite 1
+        if: always()
         run: |
           pytest super_app/super_app_tests/test_one.py  --junitxml=./report-1.xml
       - name: Run test suite 2
+        if: always()
         run: |
           pytest super_app/super_app_tests/sub  --junitxml=./report-2.xml
       #     evilkost/publish-unit-test-result-action
