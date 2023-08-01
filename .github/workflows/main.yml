@@ -21,4 +21,13 @@ jobs:
           python -m pip install pdm pytest
       - name: Run test suite
         run: |
-          pytest .
+          pytest .  --junitxml=./report.xml
+      #     evilkost/publish-unit-test-result-action
+      - name: Publish Test Results
+        uses: evilkost/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            ./report.xml
+
+
