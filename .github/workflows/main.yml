@@ -19,7 +19,7 @@ jobs:
 
     timeout-minutes: 10
 
-    runs-on: [ linux ]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository code
