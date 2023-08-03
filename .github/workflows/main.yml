@@ -101,6 +101,6 @@ jobs:
         if: always()
         with:
           files: |
-            ./report-*.xml
+            ./report/*.xml
 
 
