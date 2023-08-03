@@ -32,24 +32,67 @@ jobs:
           python-version: "3.x"
       - name: Install deps
         run: |
-          python -m pip install pdm pytest
+          python -m pip install pytest
       - run: pwd
       - run: ls -laht
       - name: Run test suite 1
         if: always()
         run: |
           pytest super_app/super_app_tests/test_one.py  --junitxml=./report-1.xml
+          
+      - uses: actions/upload-artifact@v3
+        with:
+          name: pytest_reports
+          path: ./report-*.xml
+
+  test2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      # Setup Python (faster than using Python container)
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.x"
+      - name: Install deps
+        run: |
+          python -m pip install pytest
+      - run: pwd
+      - run: ls -laht
       - name: Run test suite 2
         if: always()
         run: |
-          pytest super_app/super_app_tests/sub  --junitxml=./report-2.xml
-      #     evilkost/publish-unit-test-result-action
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        #uses: evilkost/publish-unit-test-result-action@6d2338823691ac5cdd10c76b1e8c7a12da852cf7
-        if: always()
+          pytest super_app/super_app_tests/sub  --junitxml=./xreport-2.xml
+          
+
+      - uses: actions/upload-artifact@v3
         with:
-          files: |
-            ./report-*.xml
+          name: pytest_reports
+          path: ./xreport-*.xml
+
+  publish_results:
+    runs-on: ubuntu-latest
+    needs: [ "test", "test2"]
+    steps:
+#      - name: Setup Python
+#          uses: actions/setup-python@v3
+#          with:
+#            python-version: "3.x"
+      - uses: actions/download-artifact@v3
+        with:
+          name: pytest_reports
+      - run: ls -laht .
+
+
+#      #     evilkost/publish-unit-test-result-action
+#      - name: Publish Test Results
+#        uses: EnricoMi/publish-unit-test-result-action@v2
+#        #uses: evilkost/publish-unit-test-result-action@6d2338823691ac5cdd10c76b1e8c7a12da852cf7
+#        if: always()
+#        with:
+#          files: |
+#            ./report-*.xml
 
 
