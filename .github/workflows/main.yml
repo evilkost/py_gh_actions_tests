@@ -88,19 +88,19 @@ jobs:
           path: ./report/
       - run: ls -laht report
 
-      - name: Publish Test Results
-        uses: evilkost/publish-unit-test-result-action/composite@v2
-        with:
-          files: "report/*.xml"
+#      - name: Publish Test Results
+#        uses: evilkost/publish-unit-test-result-action/composite@v2
+#        with:
+#          files: "report/*.xml"
 
 
 #      #     evilkost/publish-unit-test-result-action
-#      - name: Publish Test Results
+      - name: Publish Test Results
 #        uses: EnricoMi/publish-unit-test-result-action@v2
-#        #uses: evilkost/publish-unit-test-result-action@6d2338823691ac5cdd10c76b1e8c7a12da852cf7
-#        if: always()
-#        with:
-#          files: |
-#            ./report-*.xml
+        uses: evilkost/publish-unit-test-result-action@6d2338823691ac5cdd10c76b1e8c7a12da852cf7
+        if: always()
+        with:
+          files: |
+            ./report-*.xml
 
 
