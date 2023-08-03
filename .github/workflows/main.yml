@@ -85,6 +85,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: pytest_reports
+          path: ./report/
       - run: ls -laht report
 
       - name: Publish Test Results
