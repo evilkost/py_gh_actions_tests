@@ -78,8 +78,8 @@ jobs:
       issues: read
       checks: write
       pull-requests: write
-    container:
-      image: ubuntu:22.04
+#    container:
+#      image: ubuntu:22.04
     steps:
       - uses: actions/download-artifact@v3
         with:
