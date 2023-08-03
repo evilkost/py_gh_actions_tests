@@ -92,7 +92,7 @@ jobs:
       - run: ls -laht report
 
       - name: Publish Test Results
-        uses: evilkost/publish-unit-test-result-action/composite@v2
+        uses: datalens-tech/publish-unit-test-result-action/
         with:
           files: |
             ./report/*.xml
