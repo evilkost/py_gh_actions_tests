@@ -38,12 +38,12 @@ jobs:
       - name: Run test suite 1
         if: always()
         run: |
-          pytest super_app/super_app_tests/test_one.py  --junitxml=./report-1.xml
+          pytest super_app/super_app_tests/test_one.py  --junitxml=./report/report-1.xml
           
       - uses: actions/upload-artifact@v3
         with:
           name: pytest_reports
-          path: ./report-*.xml
+          path: ./report/
 
   test2:
     runs-on: ubuntu-latest
@@ -64,17 +64,19 @@ jobs:
       - name: Run test suite 2
         if: always()
         run: |
-          pytest super_app/super_app_tests/sub  --junitxml=./xreport-2.xml
+          pytest super_app/super_app_tests/sub  --junitxml=./report/report-2.xml
           
 
       - uses: actions/upload-artifact@v3
         with:
           name: pytest_reports
-          path: ./xreport-*.xml
+          path: ./report/
 
   publish_results:
     runs-on: ubuntu-latest
     needs: [ "test", "test2"]
+    container:
+      image: python:3.10
     steps:
 #      - name: Setup Python
 #          uses: actions/setup-python@v3
@@ -83,7 +85,12 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: pytest_reports
-      - run: ls -laht .
+      - run: ls -laht report
+
+      - name: Publish Test Results
+        uses: evilkost/publish-unit-test-result-action/composite@v2
+        with:
+          files: "report/*.xml"
 
 
 #      #     evilkost/publish-unit-test-result-action
