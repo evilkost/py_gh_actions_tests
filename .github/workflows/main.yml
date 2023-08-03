@@ -79,12 +79,8 @@ jobs:
       checks: write
       pull-requests: write
     container:
-      image: python:3.10
+      image: ubuntu:22.04
     steps:
-#      - name: Setup Python
-#          uses: actions/setup-python@v3
-#          with:
-#            python-version: "3.x"
       - uses: actions/download-artifact@v3
         with:
           name: pytest_reports
