@@ -73,6 +73,7 @@ jobs:
     # runs-on: ubuntu-latest
     runs-on: [self-hosted, linux]
     needs: [ "test", "test2"]
+    if: always()
     permissions:
       contents: read
       issues: read
