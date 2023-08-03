@@ -92,7 +92,7 @@ jobs:
       - run: ls -laht report
 
       - name: Publish Test Results
-        uses: datalens-tech/publish-unit-test-result-action/
+        uses: datalens-tech/publish-unit-test-result-action@sha256:eb70f771279757a7448a3fbaf4d3b24436cd9c81
         with:
           files: |
             ./report/*.xml
